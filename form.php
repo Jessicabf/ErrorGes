@@ -19,9 +19,6 @@ spl_autoload_register(function ($class) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
     <link rel="stylesheet" href="estilos.css">
-       <link href="https://cdrst.com/guia-estilo/1.79.6/cdrcom.css" rel="stylesheet">
-
-
 </head>
 <body>
 <header>
@@ -29,7 +26,7 @@ spl_autoload_register(function ($class) {
     <form name="formLogin" action="index.php" method="POST">
         <fieldset id="formLogin">
             <p>Usuario conectado como <?= $name ?></p>
-            <input type='submit' value='Desconectar' name='desconectar'>
+            <button type='submit' id="botonSelec" value='Desconectar' name='desconectar'>Desconectar</button>
         </fieldset>
     </form>
 </header>
@@ -38,50 +35,48 @@ spl_autoload_register(function ($class) {
         <fieldset>
             <legend class="legend_tittle">BÚSQUEDA DE ERRORES</legend>
             <fieldset>
+                <legend>FECHA</legend>
+                <label for="fecha_desde">Fecha desde ⃰ </label>
+                <input type="date" name="fecha_desde" id="fecha_desde" required><br>
+                <label for="fecha_hasta">Fecha hasta ⃰ </label>
+                <input type="date" name="fecha_hasta" id="fecha_hasta"  required><br>
+            </fieldset>
+            <fieldset>
                 <legend>HOTEL</legend>
-                <input type="text" id="nombre_hotel" name="nombre_hotel" size="30">
-                <label for="nombre">Nombre:</label><br>
-                <input type="text" id="localidad" name="localidad" size="30">
-                <label for="localidad">Localidad:</label><br>
-                <button id="button" onclick="obtenerHoteles(); return false;">Buscar hotel</button>
-                <button class="btn-default btn-sm" onclick="obtenerHoteles(); return false;">Buscar hotel</button>
-
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre_hotel" name="nombre_hotel" size="30"/><br>
+                <label for="localidad">Localidad:</label>
+                <input type="text" id="localidad" name="localidad" size="30"/><br>
+                <button id="botonSelec" onclick="obtenerHoteles(); return false;">Buscar hotel</button>
                 <div id="resultados"></div>
             </fieldset>
             <fieldset>
                 <legend>SF</legend>
-                <input type="text" name="sf" id="sf" size="10">
                 <label for="sf">SF:</label>
+                <input type="text" name="sf" id="sf" size="10"/>
                 <div id="resultados"></div>
             </fieldset>
+            <div id="errores"></div>
             <fieldset>
                 <legend>CLIENTE</legend>
-                <input type="text" name="telefono" id="telefono" maxlength="9" onfocusout="validarTelefono()">
-                <label for="telefono">Teléfono:</label><br>
-                <input name="email" type="text" id="email" onfocusout="validarEmail()" />
+                <label for="telefono">Teléfono:</label>
+                <input type="text" name="telefono" id="telefono" maxlength="9" onfocusout="validarTelefono()"><br>
                 <label for="email">Email:</label>
+                <input name="email" type="text" id="email" onfocusout="validarEmail()" />
             </fieldset>
             <fieldset>
                 <legend>MAYORISTA</legend>
-                <input type="text" name="mayorista" id="mayorista" size="10">
                 <label for="mayorista">Mayorista:</label>
-            </fieldset>
-            <fieldset>
-                <legend>FECHA</legend>
-                <input type="date" name="fecha_desde" id="fecha_desde" size="40" required>
-                <label for="fecha_desde">Fecha desde: (*)</label><br>
-                <input type="date" name="fecha_hasta" id="fecha_hasta" size="40" required>
-                <label for="fecha_hasta">Fecha hasta: (*)</label>
+                <input type="text" name="mayorista" id="mayorista" size="10">
             </fieldset>
             <p>
-                <input id="button" type="submit" value="Buscar" name="submit">
-                <input id="button" type="reset" value="Borrar" onclick="borrarHoteles()">
+                <button id="button" type="submit" value="Buscar" name="submit">Buscar</button>
+                <button id="button" type="reset" value="Borrar" onclick="borrarHoteles()">Borrar</button>
                 <input type='hidden' value='<?= $name ?>' name='name'>
             </p>
         </fieldset>
     </form>
 </div>
-<div id="errores"></div>
 
 
 <div id="formularioCron">
